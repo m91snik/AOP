@@ -14,6 +14,14 @@
     <context:spring-configured/>
 
     <!--uncomment to enable aspects-->
-    <aop:aspectj-autoproxy/>
+    <!--<aop:aspectj-autoproxy/>-->
+
+    <bean class="com.m91snik.aspect.LoggingAspect" factory-method="aspectOf"/>
+    <bean class="com.m91snik.aspect.SecurityProtectionAspect" factory-method="aspectOf"/>
+    <bean class="com.m91snik.aspect.ExceptionProcessingAspect" factory-method="aspectOf"/>
+
+    <!--<bean class="com.m91snik.aspect.PrecedenceAspect" factory-method="aspectOf"/>-->
+
+    <!--<context:load-time-weaver/>-->
 
 </beans>
