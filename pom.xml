@@ -9,53 +9,62 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <org.springframework-version>4.1.5.RELEASE</org.springframework-version>
+        <springframework.version>4.1.5.RELEASE</springframework.version>
         <aspectj.version>1.8.2</aspectj.version>
         <java.version>1.8</java.version>
+        <spring-instrument.version>3.2.8.RELEASE</spring-instrument.version>
     </properties>
 
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<version>3.0</version>-->
-                <!--<configuration>-->
-                    <!--<source>${java.version}</source>-->
-                    <!--<target>${java.version}</target>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
+            <!--NOTE: it's default and suitable for Spring AOP & AspectJ LTW-->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.7</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
                 <configuration>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <!--<outxmlfile>META-INF/aop.xml</outxmlfile>-->
-                    <!--<aspectLibraries>-->
-                        <!--<aspectLibrary>-->
-                            <!--<groupId>org.springframework</groupId>-->
-                            <!--<artifactId>spring-aspects</artifactId>-->
-                        <!--</aspectLibrary>-->
-                    <!--</aspectLibraries>-->
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <Xlint>ignore</Xlint>
-                    <complianceLevel>${java.version}</complianceLevel>
-                    <encoding>UTF-8</encoding>
-                    <verbose>true</verbose>
                 </configuration>
-                <executions>
-                    <execution>
-                        <!-- IMPORTANT -->
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                            <!--<goal>test-compile</goal>-->
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+
+            <!--NOTE: for AspectJ CTW-->
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>aspectj-maven-plugin</artifactId>-->
+            <!--<version>1.7</version>-->
+            <!--<configuration>-->
+            <!--<showWeaveInfo>true</showWeaveInfo>-->
+            <!--<source>${java.version}</source>-->
+            <!--<target>${java.version}</target>-->
+            <!--<Xlint>ignore</Xlint>-->
+            <!--<complianceLevel>${java.version}</complianceLevel>-->
+            <!--<encoding>UTF-8</encoding>-->
+            <!--<verbose>true</verbose>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>process-sources</phase>-->
+            <!--<goals>-->
+            <!--<goal>compile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <!--NOTE: for AspectJ LTW unit testing-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.9</version>-->
+                <!--<configuration>-->
+                    <!--<argLine>-XX:-UseSplitVerifier</argLine>-->
+                    <!--<argLine>-->
+                        <!---javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${spring-instrument.version}/spring-instrument-${spring-instrument.version}.jar-->
+
+                    <!--</argLine>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-3.2.8.RELEASE.jar-->
         </plugins>
     </build>
 
@@ -63,12 +72,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${springframework.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -82,7 +91,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${springframework.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -92,12 +101,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${springframework.version}</version>
         </dependency>
 
         <!--aspectj-->
@@ -108,12 +117,14 @@
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
+            <artifactId>aspectjtools</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
+
+        <!--NOTE: for LTW-->
         <dependency>
             <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
+            <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
 

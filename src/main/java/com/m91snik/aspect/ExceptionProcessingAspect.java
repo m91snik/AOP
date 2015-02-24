@@ -8,11 +8,13 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+//NOTE: for Spring AOP
+@Component
+
 @Aspect
-//@Component
 public class ExceptionProcessingAspect {
 
-    @AfterThrowing(pointcut = "execution(* com.m91snik.business..*(..))",
+    @AfterThrowing(pointcut = "execution(* com.m91snik.business.service..*(..))",
             throwing = "e")
     public void checkUserPermission(Throwable e) throws Throwable {
         if (!(e instanceof ImportantException)) {

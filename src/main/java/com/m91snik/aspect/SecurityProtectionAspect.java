@@ -14,9 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+//NOTE: for Spring AOP
+@Component
+
+//NOTE: set precedence for Spring AOP
+@Order(2)
+
 @Aspect
-//@Component
-//@Order(2)
+
 public class SecurityProtectionAspect {
 
     @Autowired

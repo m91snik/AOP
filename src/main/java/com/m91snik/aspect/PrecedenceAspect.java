@@ -9,6 +9,6 @@ import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.springframework.stereotype.Component;
 
 @Aspect
-@DeclarePrecedence("com.m91snik.aspect.LoggingAspect,com.m91snik.aspect.SecurityProtectionAspect")
+@DeclarePrecedence("com.m91snik.aspect.SecurityProtectionAspect,com.m91snik.aspect.LoggingAspect")
 public class PrecedenceAspect {
 }

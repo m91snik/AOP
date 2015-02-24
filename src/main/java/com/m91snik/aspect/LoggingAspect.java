@@ -10,15 +10,19 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+//NOTE: for Spring AOP
+@Component
+//NOTE: set precedence for Spring AOP
+@Order(1)
+
 @Aspect
-//@Component
-//@Order(1)
 public class LoggingAspect {
 
     private static final Gson GSON = new Gson();
 
+//    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodCallPointcut()")
+    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodPointcutWithin()")
 //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()")
-    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()")
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("LoggingAspect begin");
 

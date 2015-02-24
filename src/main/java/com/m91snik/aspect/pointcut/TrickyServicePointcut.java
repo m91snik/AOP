@@ -9,7 +9,14 @@ public class TrickyServicePointcut {
 
     @Pointcut("execution(* com.m91snik.business..*(..)) && " +
             "(within(com.m91snik.business.service..*) ||" +
+            "within(com.m91snik.business.session.impl..*) || " +
+            "within(com.m91snik.business.session.dto.Session))")
+    public void businessMethodPointcutWithin(){
+    }
+
+    @Pointcut("call(* com.m91snik.business..*(..)) && " +
+            "(within(com.m91snik.business.service..*) ||" +
             "within(com.m91snik.business.session.impl..*))")
-    public void businessMethodPointcut(){
+    public void businessMethodCallPointcut(){
     }
 }

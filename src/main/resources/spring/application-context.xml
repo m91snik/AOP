@@ -13,15 +13,17 @@
     <context:annotation-config/>
     <context:spring-configured/>
 
-    <!--uncomment to enable aspects-->
+    <!--NOTE: for Spring AOP-->
     <!--<aop:aspectj-autoproxy/>-->
+    <!--NOTE: for Spring AOP CGLIB Only-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean class="com.m91snik.aspect.LoggingAspect" factory-method="aspectOf"/>
-    <bean class="com.m91snik.aspect.SecurityProtectionAspect" factory-method="aspectOf"/>
-    <bean class="com.m91snik.aspect.ExceptionProcessingAspect" factory-method="aspectOf"/>
+    <!--NOTE: for AspectJ CTW & LTW-->
+    <!--<bean class="com.m91snik.aspect.LoggingAspect" factory-method="aspectOf"/>-->
+    <!--<bean class="com.m91snik.aspect.SecurityProtectionAspect" factory-method="aspectOf"/>-->
+    <!--<bean class="com.m91snik.aspect.ExceptionProcessingAspect" factory-method="aspectOf"/>-->
 
-    <!--<bean class="com.m91snik.aspect.PrecedenceAspect" factory-method="aspectOf"/>-->
-
+    <!--NOTE: for AspectJ LTW-->
     <!--<context:load-time-weaver/>-->
 
 </beans>

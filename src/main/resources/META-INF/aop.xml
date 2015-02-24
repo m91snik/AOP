@@ -1,0 +1,18 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<!--NOTE: this file is required for AspectJ LTW-->
+<aspectj showWeavingInfo="true">
+    <weaver>
+        <include within="com.m91snik.aspect..*"/>
+        <include within="com.m91snik.business..*"/>
+    </weaver>
+
+    <aspects>
+
+        <aspect name="com.m91snik.aspect.PrecedenceAspect"/>
+        <aspect name="com.m91snik.aspect.ExceptionProcessingAspect"/>
+        <aspect name="com.m91snik.aspect.LoggingAspect"/>
+        <aspect name="com.m91snik.aspect.SecurityProtectionAspect"/>
+
+    </aspects>
+</aspectj>

@@ -3,6 +3,10 @@
  */
 package com.m91snik.business.session.dto;
 
+import org.springframework.beans.factory.annotation.Configurable;
+
+//NOTE: for Spring AOP usage
+//@Configurable
 public class Session {
     private final String id;
     private final Group group;
