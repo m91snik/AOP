@@ -18,38 +18,38 @@
     <build>
         <plugins>
             <!--NOTE: it's default and suitable for Spring AOP & AspectJ LTW-->
-            <!--<plugin>-->
-            <!--<artifactId>maven-compiler-plugin</artifactId>-->
-            <!--<version>3.0</version>-->
-            <!--<configuration>-->
-            <!--<source>${java.version}</source>-->
-            <!--<target>${java.version}</target>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-
-            <!--NOTE: for AspectJ CTW-->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.7</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
                 <configuration>
-                    <showWeaveInfo>true</showWeaveInfo>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <Xlint>ignore</Xlint>
-                    <complianceLevel>${java.version}</complianceLevel>
-                    <encoding>UTF-8</encoding>
-                    <verbose>true</verbose>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+
+            <!--NOTE: for AspectJ CTW-->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>aspectj-maven-plugin</artifactId>-->
+                <!--<version>1.7</version>-->
+                <!--<configuration>-->
+                    <!--<showWeaveInfo>true</showWeaveInfo>-->
+                    <!--<source>${java.version}</source>-->
+                    <!--<target>${java.version}</target>-->
+                    <!--<Xlint>ignore</Xlint>-->
+                    <!--<complianceLevel>${java.version}</complianceLevel>-->
+                    <!--<encoding>UTF-8</encoding>-->
+                    <!--<verbose>true</verbose>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>process-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>compile</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <!--NOTE: for AspectJ LTW unit testing-->
             <!--<plugin>-->

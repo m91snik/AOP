@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.DeclareWarning;
  * Created by nikolay.garbuzov on 25.02.15.
  */
 @Aspect
-public class CrossCuttingAspect {
+public class StaticCrossCuttingAspect {
 
     @DeclareWarning("call(* com.m91snik.business.service.BankService.*(..))")
     private static final String UNSAFE_USAGE_ERROR = "Usage of unsafe method!";
