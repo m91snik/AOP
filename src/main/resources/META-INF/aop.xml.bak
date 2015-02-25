@@ -14,5 +14,7 @@
         <aspect name="com.m91snik.aspect.LoggingAspect"/>
         <aspect name="com.m91snik.aspect.SecurityProtectionAspect"/>
 
+        <aspect name="com.m91snik.aspect.PaymentFlowAspect"/>
+
     </aspects>
 </aspectj>

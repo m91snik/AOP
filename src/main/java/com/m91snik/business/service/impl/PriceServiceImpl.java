@@ -24,6 +24,7 @@ public class PriceServiceImpl implements PriceService {
         IntSummaryStatistics stats = getIntSummaryStatistics(prices);
         long sum = stats.getSum();
         if (sum > 100) {
+            System.out.println("Prices are too high");
             throw new ImportantException("Prices are too high");
         }
     }
