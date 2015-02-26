@@ -25,6 +25,9 @@
                     <version>${springframework.version}</version>
                 </dependency>
             </dependencies>
+            <properties>
+                <target>spring_aop</target>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -48,6 +51,9 @@
                     <version>${aspectj.version}</version>
                 </dependency>
             </dependencies>
+            <properties>
+                <target>aspectj_ctw</target>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -81,13 +87,34 @@
             <id>aspectj_ltw</id>
             <dependencies>
                 <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                    <version>${springframework.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjtools</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+                <dependency>
                     <groupId>org.aspectj</groupId>
                     <artifactId>aspectjweaver</artifactId>
                     <version>${aspectj.version}</version>
                 </dependency>
             </dependencies>
+            <properties>
+                <target>aspectj_ltw</target>
+            </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.0</version>
+                        <configuration>
+                            <source>${java.version}</source>
+                            <target>${java.version}</target>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
@@ -105,7 +132,28 @@
 
     </profiles>
 
-            <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-3.2.8.RELEASE.jar-->
+    <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-3.2.8.RELEASE.jar-->
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
