@@ -12,7 +12,6 @@
         <springframework.version>4.1.5.RELEASE</springframework.version>
         <aspectj.version>1.8.2</aspectj.version>
         <java.version>1.8</java.version>
-        <spring-instrument.version>3.2.8.RELEASE</spring-instrument.version>
     </properties>
 
     <profiles>
@@ -25,6 +24,9 @@
                     <version>${springframework.version}</version>
                 </dependency>
             </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <target>spring_aop</target>
             </properties>
@@ -46,8 +48,18 @@
             <id>aspectj_ctw</id>
             <dependencies>
                 <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                    <version>${springframework.version}</version>
+                </dependency>
+                <dependency>
                     <groupId>org.aspectj</groupId>
                     <artifactId>aspectjtools</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
                     <version>${aspectj.version}</version>
                 </dependency>
             </dependencies>
@@ -56,6 +68,16 @@
             </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-compile</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>aspectj-maven-plugin</artifactId>
@@ -71,7 +93,7 @@
                         </configuration>
                         <executions>
                             <execution>
-                                <phase>process-sources</phase>
+                                <id>generate-sources</id>
                                 <goals>
                                     <goal>compile</goal>
                                 </goals>
@@ -87,19 +109,14 @@
             <id>aspectj_ltw</id>
             <dependencies>
                 <dependency>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-aop</artifactId>
-                    <version>${springframework.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjtools</artifactId>
-                    <version>${aspectj.version}</version>
-                </dependency>
-                <dependency>
                     <groupId>org.aspectj</groupId>
                     <artifactId>aspectjweaver</artifactId>
                     <version>${aspectj.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-instrument</artifactId>
+                    <version>${springframework.version}</version>
                 </dependency>
             </dependencies>
             <properties>
@@ -122,7 +139,7 @@
                         <configuration>
                             <argLine>-XX:-UseSplitVerifier</argLine>
                             <argLine>
-                                -javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${spring-instrument.version}/spring-instrument-${spring-instrument.version}.jar
+                                -javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${springframework.version}/spring-instrument-${springframework.version}.jar
                             </argLine>
                         </configuration>
                     </plugin>
@@ -138,6 +155,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
 

@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.DeclareWarning;
 @Aspect
 public class StaticCrossCuttingAspect {
 
+    //TODO: compare with static analyzer
     @DeclareWarning("call(* com.m91snik.business.service.BankService.*(..))")
     private static final String UNSAFE_USAGE_ERROR = "Usage of unsafe method!";
 

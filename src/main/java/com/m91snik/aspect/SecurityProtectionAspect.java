@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 @Order(2)
 
 @Aspect
-
 public class SecurityProtectionAspect {
 
     @Autowired
@@ -39,7 +38,7 @@ public class SecurityProtectionAspect {
         }
 
         if (!checkPermissions(sessionRequired, currentSession)) {
-            System.out.println("SecurityProtectionAspect end");
+            System.err.println("Security rules violated group is " + currentSession.getGroup());
             throw new IllegalStateException(currentSession.getGroup() + " not allowed");
         }
 

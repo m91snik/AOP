@@ -26,7 +26,7 @@ public class PaymentServiceImplTest {
         paymentService.doCredit(10);
     }
 
-//    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testDoCreditPermissionRestricted() throws Exception {
         sessionService.createSession("1", Group.ANONYMOUS);
         paymentService.doCredit(10);
