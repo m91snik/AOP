@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class PaymentFlowAspect {
 
-    @Pointcut("cflow(execution(* com.m91snik.business.service.PaymentService.doCredit(..))) && within(com.m91snik.business.service..*)")
+    @Pointcut("cflow(execution(* com.m91snik.business.service.PaymentService.doCredit(..))) && " +
+            "within(com.m91snik.business.service..*)")
     public void flow() {
     }
 

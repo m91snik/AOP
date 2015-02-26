@@ -20,8 +20,8 @@ public class LoggingAspect {
 
     private static final Gson GSON = new Gson();
 
-//    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodCallPointcut()")
-    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodPointcutWithin()")
+    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodCallPointcut()")
+//    @Around("com.m91snik.aspect.pointcut.TrickyServicePointcut.businessMethodPointcutWithin()")
 //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()")
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("LoggingAspect begin");

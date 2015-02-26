@@ -24,7 +24,7 @@ public class PriceServiceImpl implements PriceService {
         IntSummaryStatistics stats = getIntSummaryStatistics(prices);
         long sum = stats.getSum();
         if (sum > 100) {
-            System.out.println("Prices are too high");
+//            System.out.println("Prices are too high");
             throw new ImportantException("Prices are too high");
         }
     }
@@ -35,7 +35,10 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public final double calculateAvgPrice(List<Integer> prices) {
+        //logging
         IntSummaryStatistics stats = getIntSummaryStatistics(prices);
-        return stats.getAverage();
+        double average = stats.getAverage();
+        //logging
+        return average;
     }
 }

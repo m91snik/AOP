@@ -15,58 +15,97 @@
         <spring-instrument.version>3.2.8.RELEASE</spring-instrument.version>
     </properties>
 
-    <build>
-        <plugins>
-            <!--NOTE: it's default and suitable for Spring AOP & AspectJ LTW-->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
+    <profiles>
+        <profile>
+            <id>spring_aop</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                    <version>${springframework.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.0</version>
+                        <configuration>
+                            <source>${java.version}</source>
+                            <target>${java.version}</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-            <!--NOTE: for AspectJ CTW-->
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>aspectj-maven-plugin</artifactId>-->
-                <!--<version>1.7</version>-->
-                <!--<configuration>-->
-                    <!--<showWeaveInfo>true</showWeaveInfo>-->
-                    <!--<source>${java.version}</source>-->
-                    <!--<target>${java.version}</target>-->
-                    <!--<Xlint>ignore</Xlint>-->
-                    <!--<complianceLevel>${java.version}</complianceLevel>-->
-                    <!--<encoding>UTF-8</encoding>-->
-                    <!--<verbose>true</verbose>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>process-sources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>compile</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+        <profile>
+            <id>aspectj_ctw</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjtools</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>aspectj-maven-plugin</artifactId>
+                        <version>1.7</version>
+                        <configuration>
+                            <showWeaveInfo>true</showWeaveInfo>
+                            <source>${java.version}</source>
+                            <target>${java.version}</target>
+                            <Xlint>ignore</Xlint>
+                            <complianceLevel>${java.version}</complianceLevel>
+                            <encoding>UTF-8</encoding>
+                            <verbose>true</verbose>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
 
-            <!--NOTE: for AspectJ LTW unit testing-->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-surefire-plugin</artifactId>-->
-            <!--<version>2.9</version>-->
-            <!--<configuration>-->
-            <!--<argLine>-XX:-UseSplitVerifier</argLine>-->
-            <!--<argLine>-->
-            <!---javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${spring-instrument.version}/spring-instrument-${spring-instrument.version}.jar-->
+        </profile>
 
-            <!--</argLine>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+        <profile>
+            <id>aspectj_ltw</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <argLine>-XX:-UseSplitVerifier</argLine>
+                            <argLine>
+                                -javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${spring-instrument.version}/spring-instrument-${spring-instrument.version}.jar
+                            </argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
             <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-3.2.8.RELEASE.jar-->
-        </plugins>
-    </build>
 
     <dependencies>
         <dependency>
@@ -95,14 +134,7 @@
             <scope>test</scope>
         </dependency>
 
-
         <!--AOP-->
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
@@ -113,18 +145,6 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-
-        <!--NOTE: for LTW-->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
 

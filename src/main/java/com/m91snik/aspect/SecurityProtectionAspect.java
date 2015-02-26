@@ -27,6 +27,7 @@ public class SecurityProtectionAspect {
     @Autowired
     private SessionService sessionService;
 
+    //TODO: compare with @Secured+SpEL
     @Around("com.m91snik.aspect.pointcut.ServicePointcut.securedBusinessMethodPointcut() && @annotation(sessionRequired)")
     public Object checkUserPermission(ProceedingJoinPoint joinPoint, SessionRequired sessionRequired) throws Throwable {
         System.out.println("SecurityProtectionAspect begin");
