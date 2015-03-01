@@ -12,15 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionServiceImpl implements SessionService {
 
-    private ThreadLocal<Session> SESSION = new ThreadLocal<>();
+    private ThreadLocal<Session> SESSION_HOLDER = new ThreadLocal<>();
 
     @Override
     public Session getCurrentSession() {
-        return SESSION.get();
+        return SESSION_HOLDER.get();
     }
 
     @Override
-    public void createSession(String userId, Group group) {
-        SESSION.set(new Session(userId, group));
+    public Session createSession(String userId, Group group) {
+        Session session = new Session(userId, group);
+        SESSION_HOLDER.set(session);
+        return session;
     }
 }

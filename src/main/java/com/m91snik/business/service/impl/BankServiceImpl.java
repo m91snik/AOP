@@ -12,7 +12,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     @UnsafeOperation
-    public void transferMoney(int sum) {
-
+    public void transferMoney(long amount) {
+        System.out.println("Doing money transfer for " + amount);
     }
 }

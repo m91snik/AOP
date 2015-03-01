@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/application-context.xml")
 public class PaymentServiceImplTest {
@@ -30,5 +29,12 @@ public class PaymentServiceImplTest {
     public void testDoCreditPermissionRestricted() throws Exception {
         sessionService.createSession("1", Group.ANONYMOUS);
         paymentService.doCredit(10);
+    }
+
+    @Test
+    public void testDoCreditPayment() throws Exception {
+        sessionService.createSession("1", Group.USER);
+        paymentService.doCredit(10);
+        paymentService.doCredit(0);
     }
 }

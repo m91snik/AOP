@@ -5,5 +5,5 @@ package com.m91snik.business.service;
  */
 public interface BankService {
 
-    void transferMoney(int sum);
+    void transferMoney(long amount);
 }

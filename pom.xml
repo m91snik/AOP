@@ -12,6 +12,7 @@
         <springframework.version>4.1.5.RELEASE</springframework.version>
         <aspectj.version>1.8.2</aspectj.version>
         <java.version>1.8</java.version>
+        <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
     </properties>
 
     <profiles>
@@ -34,10 +35,23 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.0</version>
+                        <version>${maven-compiler-plugin.version}</version>
                         <configuration>
                             <source>${java.version}</source>
                             <target>${java.version}</target>
+                            <excludes>
+                                <exclude>**/aspect/flow/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/facade/**</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -71,6 +85,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
+                        <version>${maven-compiler-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>default-compile</id>
@@ -100,10 +115,104 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/facade/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
 
         </profile>
+
+        <profile>
+            <id>aspectj_ctw_cflow</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                    <version>${springframework.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjtools</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
+            </dependencies>
+            <properties>
+                <target>aspectj_ctw_cflow</target>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>${maven-compiler-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>default-compile</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>aspectj-maven-plugin</artifactId>
+                        <version>1.7</version>
+                        <configuration>
+                            <showWeaveInfo>true</showWeaveInfo>
+                            <source>${java.version}</source>
+                            <target>${java.version}</target>
+                            <Xlint>ignore</Xlint>
+                            <complianceLevel>${java.version}</complianceLevel>
+                            <encoding>UTF-8</encoding>
+                            <verbose>true</verbose>
+                            <sources>
+                                <source>
+                                    <basedir>src/main/java</basedir>
+                                    <excludes>
+                                        <exclude>**/aspect/around/**</exclude>
+                                        <exclude>**/aspect/after/**</exclude>
+                                        <exclude>**/aspect/before/**</exclude>
+                                        <exclude>**/aspect/PrecedenceAspect.java</exclude>
+                                    </excludes>
+                                </source>
+                            </sources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.9</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/business/service/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
 
         <profile>
             <id>aspectj_ltw</id>
@@ -117,7 +226,6 @@
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-instrument</artifactId>
                     <version>${springframework.version}</version>
-                    <scope>provided</scope>
                 </dependency>
             </dependencies>
             <properties>
@@ -127,10 +235,13 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.0</version>
+                        <version>${maven-compiler-plugin.version}</version>
                         <configuration>
                             <source>${java.version}</source>
                             <target>${java.version}</target>
+                            <excludes>
+                                <exclude>**/aspect/flow/**</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -142,6 +253,9 @@
                             <argLine>
                                 -javaagent:${user.home}/.m2/repository/org/springframework/spring-instrument/${springframework.version}/spring-instrument-${springframework.version}.jar
                             </argLine>
+                            <excludes>
+                                <exclude>**/facade/**</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>

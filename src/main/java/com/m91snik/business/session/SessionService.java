@@ -10,5 +10,5 @@ public interface SessionService {
 
     Session getCurrentSession();
 
-    void createSession(String userId, Group group);
+    Session createSession(String userId, Group group);
 }

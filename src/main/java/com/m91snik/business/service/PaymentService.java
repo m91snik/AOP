@@ -6,5 +6,5 @@ package com.m91snik.business.service;
 
 public interface PaymentService {
 
-    void doCredit(int amount);
+    void doCredit(long amount);
 }

@@ -17,7 +17,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @SessionRequired(group = {Group.USER, Group.OPERATOR})
-    public void doCredit(int amount) {
+    public void doCredit(long amount) {
         //TODO: do credit payment
         bankService.transferMoney(amount);
     }
