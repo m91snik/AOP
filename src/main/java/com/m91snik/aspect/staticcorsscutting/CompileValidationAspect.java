@@ -1,10 +1,13 @@
+/**
+ * Created by nikolay.garbuzov on 25.02.15.
+ */
 package com.m91snik.aspect.staticcorsscutting;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.DeclareWarning;
 
 /**
- * Created by nikolay.garbuzov on 25.02.15.
+ * Provides compile check rules
  */
 @Aspect
 public class CompileValidationAspect {

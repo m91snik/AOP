@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 
 /**
- * An example of exception processing aspect
+ * An example of exception processing aspect which applied after exception throwing and can be used to send notification
  */
 @Aspect
 public class ExceptionProcessingAspect {

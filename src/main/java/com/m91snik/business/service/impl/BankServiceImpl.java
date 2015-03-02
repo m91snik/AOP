@@ -12,7 +12,8 @@ public class BankServiceImpl implements BankService {
 
     @Override
     @UnsafeOperation
-    public void transferMoney(long amount) {
+    public long transferMoney(long amount) {
         System.out.println("Doing money transfer for " + amount);
+        return amount;
     }
 }

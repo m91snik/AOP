@@ -5,6 +5,9 @@ package com.m91snik.aspect.pointcut;
 
 import org.aspectj.lang.annotation.Pointcut;
 
+/**
+ * Collection of pointcuts
+ */
 public class ServicePointcut {
 
     @Pointcut("execution(* com.m91snik.business.service..*(..))")

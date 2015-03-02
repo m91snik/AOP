@@ -11,8 +11,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-
-@Aspect//("percflow(execution(public void com.m91snik.business.facade.PaymentServiceFacade.creditPayment(..)))")
+@Aspect
 public class PaymentFlowLoggingAspect {
 
     private static final Gson GSON = new Gson();
