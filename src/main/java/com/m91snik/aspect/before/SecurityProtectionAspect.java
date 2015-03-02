@@ -3,7 +3,7 @@
  */
 package com.m91snik.aspect.before;
 
-import com.m91snik.annotation.SessionRequired;
+import com.m91snik.contract.SessionRequired;
 import com.m91snik.business.session.SessionService;
 import com.m91snik.business.session.dto.Group;
 import com.m91snik.business.session.dto.Session;
@@ -19,7 +19,7 @@ public class SecurityProtectionAspect {
     @Autowired
     private SessionService sessionService;
 
-    //NOTE: it provides more flexibility than Spring @Secured annotation because you can use any pointcut here
+    //NOTE: it provides more flexibility than Spring @Secured contract because you can use any pointcut here
     @Before("com.m91snik.aspect.pointcut.ServicePointcut.securedBusinessMethodPointcut() && @annotation(sessionRequired)")
     public void checkUserPermission(SessionRequired sessionRequired) throws Throwable {
         Session currentSession = sessionService.getCurrentSession();

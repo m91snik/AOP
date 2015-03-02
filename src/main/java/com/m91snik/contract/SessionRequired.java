@@ -1,4 +1,4 @@
-package com.m91snik.annotation;
+package com.m91snik.contract;
 
 import com.m91snik.business.session.dto.Group;
 
@@ -8,10 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Use this annotation on methods which should requires session
+ * Use this contract on methods which should requires session
  */
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface UnsafeOperation {
-
+public @interface SessionRequired {
+    Group[] group();
 }

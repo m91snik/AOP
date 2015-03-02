@@ -3,7 +3,7 @@
  */
 package com.m91snik.facade;
 
-import com.m91snik.annotation.SessionRequired;
+import com.m91snik.contract.SessionRequired;
 import com.m91snik.business.service.PaymentService;
 import com.m91snik.business.session.dto.Group;
 import com.m91snik.business.session.dto.Session;

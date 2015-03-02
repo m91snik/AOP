@@ -3,7 +3,7 @@
  */
 package com.m91snik.business.service.impl;
 
-import com.m91snik.annotation.ExceptionProcessingRequired;
+import com.m91snik.contract.ExceptionProcessingRequired;
 import com.m91snik.business.exception.BusinessException;
 import com.m91snik.business.exception.ImportantException;
 import com.m91snik.business.service.PriceService;
@@ -24,7 +24,6 @@ public class PriceServiceImpl implements PriceService {
         IntSummaryStatistics stats = getIntSummaryStatistics(prices);
         long sum = stats.getSum();
         if (sum > 100) {
-//            System.out.println("Prices are too high");
             throw new ImportantException("Prices are too high");
         }
     }

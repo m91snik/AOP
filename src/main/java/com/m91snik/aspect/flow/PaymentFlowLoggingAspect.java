@@ -5,6 +5,7 @@ package com.m91snik.aspect.flow;
 
 import com.google.gson.Gson;
 import com.m91snik.business.session.dto.Session;
+import com.m91snik.contract.HasRefId;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,19 +21,19 @@ public class PaymentFlowLoggingAspect {
         System.out.println("FlowLoggingAspect init");
     }
 
-    @Pointcut("execution(* com.m91snik.facade.PaymentServiceFacade.*(com.m91snik.business.session.dto.Session,..)) && args(session,..)")
-    public void paymentServiceFacadeUsage(Session session) {
+    @Pointcut("execution(* com.m91snik.facade.PaymentServiceFacade.*(com.m91snik.contract.HasRefId+,..)) && args(hasRefId,..)")
+    public void paymentServiceFacadeUsage(HasRefId hasRefId) {
     }
 
     @Pointcut("execution(public * com.m91snik.business.service..*(..))")
     public void paymentServiceFacadeCalls() {
     }
 
-    @Around("cflow(paymentServiceFacadeUsage(session)) && paymentServiceFacadeCalls()")
-    public Object logMethodExecution(Session session, ProceedingJoinPoint joinPoint) throws Throwable {
-        String internalReferenceId = session.getInternalReferenceId();
+    @Around("cflow(paymentServiceFacadeUsage(hasRefId)) && paymentServiceFacadeCalls()")
+    public Object logMethodExecution(HasRefId hasRefId, ProceedingJoinPoint joinPoint) throws Throwable {
+        String refId = hasRefId.getRefId();
 
-        String methodContext = "Session = " + internalReferenceId + ". Method " + joinPoint.toShortString();
+        String methodContext = "Session = " + refId + ". Method " + joinPoint.toShortString();
         System.out.println(methodContext + " with args " + "" + GSON.toJson(joinPoint.getArgs()));
         Object result;
         try {

@@ -3,7 +3,7 @@
  */
 package com.m91snik.business.service.impl;
 
-import com.m91snik.annotation.SessionRequired;
+import com.m91snik.contract.SessionRequired;
 import com.m91snik.business.service.BankService;
 import com.m91snik.business.service.PaymentService;
 import com.m91snik.business.session.dto.Group;

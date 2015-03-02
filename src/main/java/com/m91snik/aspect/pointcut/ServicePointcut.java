@@ -11,7 +11,7 @@ public class ServicePointcut {
     public void businessMethodPointcut(){
     }
 
-    @Pointcut("execution(@com.m91snik.annotation.SessionRequired * com.m91snik.business.service..*(..))")
+    @Pointcut("execution(@com.m91snik.contract.SessionRequired * com.m91snik.business.service..*(..))")
     public void securedBusinessMethodPointcut(){
     }
 
