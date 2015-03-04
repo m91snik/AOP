@@ -34,10 +34,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public final double calculateAvgPrice(List<Integer> prices) {
-        //logging
         IntSummaryStatistics stats = getIntSummaryStatistics(prices);
-        double average = stats.getAverage();
-        //logging
-        return average;
+        return stats.getAverage();
     }
 }

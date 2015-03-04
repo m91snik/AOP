@@ -32,11 +32,4 @@ public class PaymentServiceImplTest {
         sessionService.createSession("1", Group.ANONYMOUS);
         paymentService.doCredit(Arrays.asList(10L, 20L));
     }
-
-    @Test
-    public void testDoCreditPayment() throws Exception {
-        sessionService.createSession("1", Group.USER);
-        paymentService.doCredit(Arrays.asList(10L));
-        paymentService.doCredit(Arrays.asList(0L));
-    }
 }

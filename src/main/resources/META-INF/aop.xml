@@ -10,8 +10,9 @@
     <aspects>
 
         <aspect name="com.m91snik.aspect.PrecedenceAspect"/>
-        <aspect name="com.m91snik.aspect.after.ExceptionProcessingAspect"/>
+
         <aspect name="com.m91snik.aspect.around.LoggingAspect"/>
+        <aspect name="com.m91snik.aspect.after.ExceptionProcessingAspect"/>
         <aspect name="com.m91snik.aspect.before.SecurityProtectionAspect"/>
 
     </aspects>

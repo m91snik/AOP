@@ -5,12 +5,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean class="com.m91snik.aspect.around.LoggingAspect"/>
-    <bean class="com.m91snik.aspect.before.SecurityProtectionAspect"/>
-    <bean class="com.m91snik.aspect.after.ExceptionProcessingAspect"/>
-
-    <aop:aspectj-autoproxy/>
-    <!--NOTE: for Spring AOP CGLIB Only-->
-    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
 </beans>

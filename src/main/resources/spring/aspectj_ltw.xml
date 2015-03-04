@@ -5,7 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="aspectj_ctw.xml"/>
     <context:load-time-weaver/>
+
+    <bean class="com.m91snik.aspect.before.SecurityProtectionAspect" factory-method="aspectOf"/>
 
 </beans>

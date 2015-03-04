@@ -21,15 +21,26 @@ public class LoggingAspect {
 //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcutWithin()")
     @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()")
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("LoggingAspect begin");
-
         Object[] args = joinPoint.getArgs();
-        System.out.println(joinPoint.getSignature().getName() + " - arguments {" + GSON.toJson(args) + "}");
-        Object result = joinPoint.proceed(args);
-        System.out.println(joinPoint.getSignature().getName() + " - result {" + GSON.toJson(result) + "}");
+        String methodName = joinPoint.getSignature().getName();
 
-        System.out.println("LoggingAspect end");
+        log(methodName + " - arguments {" + GSON.toJson(args) + "}");
+
+        Object result;
+        try {
+            result = joinPoint.proceed(args);
+        } catch (Throwable t) {
+            log(methodName + " - failed with " + t.getMessage());
+            throw t;
+        }
+
+        log(methodName + " - result {" + GSON.toJson(result) + "}");
+
         return result;
+    }
+
+    private void log(String message) {
+        System.out.println(message);
     }
 
 }
