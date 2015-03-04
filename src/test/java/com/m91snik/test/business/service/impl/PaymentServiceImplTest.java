@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Arrays;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/application-context.xml")
 public class PaymentServiceImplTest {
@@ -22,19 +24,19 @@ public class PaymentServiceImplTest {
     @Test
     public void testDoCredit() throws Exception {
         sessionService.createSession("1", Group.USER);
-        paymentService.doCredit(10);
+        paymentService.doCredit(Arrays.asList(10L, 20L));
     }
 
     @Test(expected = IllegalStateException.class)
     public void testDoCreditPermissionRestricted() throws Exception {
         sessionService.createSession("1", Group.ANONYMOUS);
-        paymentService.doCredit(10);
+        paymentService.doCredit(Arrays.asList(10L, 20L));
     }
 
     @Test
     public void testDoCreditPayment() throws Exception {
         sessionService.createSession("1", Group.USER);
-        paymentService.doCredit(10);
-        paymentService.doCredit(0);
+        paymentService.doCredit(Arrays.asList(10L));
+        paymentService.doCredit(Arrays.asList(0L));
     }
 }

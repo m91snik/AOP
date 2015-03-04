@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -23,18 +24,18 @@ public class PaymentServiceFacadeTest {
     @Test
     public void testCreditPayment() throws Exception {
 
-        int parties = 50;
+        int parties = 1;
         ExecutorService executorService = Executors.newFixedThreadPool(parties);
         final CyclicBarrier cyclicBarrier = new CyclicBarrier(parties);
 
         List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
-        for (int i = 0; i < parties; i++) {
+        for (int i = 0; i < parties * 2; i++) {
             final int number = i;
             Future<Integer> submit = executorService.submit(new Callable<Integer>() {
                 @Override
                 public Integer call() throws Exception {
                     cyclicBarrier.await();
-                    doCreditPayment(100 * (number + 1), number);
+                    doCreditPayment(Arrays.asList(10L * (number + 1), 100L * (number + 1)), number);
                     return number;
                 }
             });
@@ -46,7 +47,7 @@ public class PaymentServiceFacadeTest {
 
     }
 
-    private void doCreditPayment(long amount, int userId) {
+    private void doCreditPayment(List<Long> amount, int userId) {
         Session session = new Session(userId + "", Group.USER);
         paymentServiceFacade.creditPayment(session, amount);
     }

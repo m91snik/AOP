@@ -10,6 +10,8 @@ import com.m91snik.business.session.dto.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaymentServiceFacade {
 
@@ -17,7 +19,7 @@ public class PaymentServiceFacade {
     private PaymentService paymentService;
 
     @SessionRequired(group = Group.USER)
-    public void creditPayment(Session session, long amount) {
+    public void creditPayment(Session session, List<Long> amount) {
         paymentService.doCredit(amount);
     }
 }
