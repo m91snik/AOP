@@ -3,10 +3,10 @@
  */
 package com.m91snik.business.service.impl;
 
-import com.m91snik.contract.ExceptionProcessingRequired;
 import com.m91snik.business.exception.BusinessException;
 import com.m91snik.business.exception.ImportantException;
 import com.m91snik.business.service.PriceService;
+import com.m91snik.contract.ExceptionProcessingRequired;
 import org.springframework.stereotype.Service;
 
 import java.util.IntSummaryStatistics;

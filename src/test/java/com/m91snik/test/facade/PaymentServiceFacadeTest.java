@@ -11,8 +11,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/application-context.xml")
@@ -25,26 +29,27 @@ public class PaymentServiceFacadeTest {
     public void testCreditPayment() throws Exception {
 
         int parties = 1;
-        ExecutorService executorService = Executors.newFixedThreadPool(parties);
-        final CyclicBarrier cyclicBarrier = new CyclicBarrier(parties);
+        Collection<Callable<Integer>> tasks = buildPaymentTasks(parties);
+        Executors.newFixedThreadPool(parties).invokeAll(tasks);
 
-        List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
+    }
+
+    private Collection<Callable<Integer>> buildPaymentTasks(int parties) throws InterruptedException,
+            BrokenBarrierException {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(parties);
+
+        Collection<Callable<Integer>> tasks = new ArrayList<>();
         for (int i = 0; i < parties * 2; i++) {
             final int number = i;
-            Future<Integer> submit = executorService.submit(new Callable<Integer>() {
-                @Override
-                public Integer call() throws Exception {
-                    cyclicBarrier.await();
-                    doCreditPayment(Arrays.asList(10L * (number + 1), 100L * (number + 1)), number);
-                    return number;
-                }
-            });
-            futures.add(submit);
+            tasks.add(() ->
+                      {
+                          cyclicBarrier.await();
+                          doCreditPayment(Arrays.asList(10L * (number + 1), 100L * (number + 1)), number);
+                          return number;
+                      }
+            );
         }
-        for (Future<Integer> future : futures) {
-            future.get();
-        }
-
+        return tasks;
     }
 
     private void doCreditPayment(List<Long> amount, int userId) {

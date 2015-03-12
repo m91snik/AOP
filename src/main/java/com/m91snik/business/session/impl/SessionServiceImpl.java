@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionServiceImpl implements SessionService {
 
-    private ThreadLocal<Session> SESSION_HOLDER = new ThreadLocal<>();
+    private final ThreadLocal<Session> SESSION_HOLDER = new ThreadLocal<>();
 
     @Override
     public Session getCurrentSession() {

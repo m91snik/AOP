@@ -4,7 +4,6 @@
 package com.m91snik.aspect.flow;
 
 import com.google.gson.Gson;
-import com.m91snik.business.session.dto.Session;
 import com.m91snik.contract.HasRefId;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
