@@ -16,7 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
 public class ExceptionProcessingAspect {
 
     @AfterThrowing(pointcut = "execution(* com.m91snik.business.service..*(..))", throwing = "e")
-    public void checkUserPermission(JoinPoint joinPoint, Throwable e) throws Throwable {
+    public void processImportantException(JoinPoint joinPoint, Throwable e) throws Throwable {
         if (!(e instanceof ImportantException)) {
             throw e;
         }

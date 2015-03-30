@@ -4,16 +4,16 @@
 package com.m91snik.business.session.dto;
 
 public class Session{
-    private final String id;
+    private final String userId;
     private final Group group;
 
-    public Session(String id, Group group) {
+    public Session(String userId, Group group) {
         this.group = group;
-        this.id = id;
+        this.userId = userId;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
     public Group getGroup() {

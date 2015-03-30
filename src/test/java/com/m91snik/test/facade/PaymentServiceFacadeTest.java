@@ -28,7 +28,7 @@ public class PaymentServiceFacadeTest {
     @Test
     public void testCreditPayment() throws Exception {
 
-        int parties = 1;
+        int parties = 3;
         Collection<Callable<Integer>> tasks = buildPaymentTasks(parties);
         Executors.newFixedThreadPool(parties).invokeAll(tasks);
 
