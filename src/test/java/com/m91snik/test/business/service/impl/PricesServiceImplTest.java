@@ -36,6 +36,7 @@ public class PricesServiceImplTest {
     @Test
     public void testCalculateAvgPrice() throws Exception {
         double avg = priceService.calculateAvgPrice(Arrays.asList(100, 200));
+        System.out.println("Avg price is " + avg);
         Assert.assertEquals(150.0, avg, 0);
 
     }
