@@ -15,7 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class ExceptionProcessingAspect {
 
-    @AfterThrowing(pointcut = "execution(* com.m91snik.business.service..*(..))", throwing = "e")
+    @AfterThrowing(pointcut = "com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()", throwing = "e")
     public void processImportantException(JoinPoint joinPoint, Throwable e) throws Throwable {
         if (!(e instanceof ImportantException)) {
             throw e;

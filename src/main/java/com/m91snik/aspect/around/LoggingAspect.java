@@ -19,7 +19,7 @@ public class LoggingAspect {
 
     //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodCallPointcut()")
 //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcutWithin()")
-    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcut()")
+    @Around("execution(* com.m91snik.business.service..*(..))")
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         String methodName = joinPoint.getSignature().getName();
