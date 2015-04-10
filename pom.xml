@@ -35,7 +35,7 @@
                             <target>${java.version}</target>
                             <excludes>
                                 <exclude>**/aspect/flow/**</exclude>
-                                <exclude>com/m91snik/business/service/BytesUtil.java</exclude>
+                                <exclude>com/m91snik/business/service/util/BytesUtil.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
@@ -79,7 +79,7 @@
                             <target>${java.version}</target>
                             <excludes>
                                 <exclude>**/aspect/flow/**</exclude>
-                                <exclude>com/m91snik/business/service/BytesUtil.java</exclude>
+                                <exclude>com/m91snik/business/service/util/BytesUtil.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
@@ -134,7 +134,7 @@
                             <target>${java.version}</target>
                             <excludes>
                                 <exclude>**/aspect/flow/**</exclude>
-                                <exclude>com/m91snik/business/service/BytesUtil.java</exclude>
+                                <exclude>com/m91snik/business/service/util/BytesUtil.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
