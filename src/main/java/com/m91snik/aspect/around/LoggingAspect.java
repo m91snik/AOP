@@ -7,18 +7,14 @@ import com.google.gson.Gson;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.core.annotation.Order;
-
-//NOTE: set precedence for Spring AOP
-@Order(1)
 
 @Aspect
 public class LoggingAspect {
 
     private static final Gson GSON = new Gson();
 
-    //    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodCallPointcut()")
-//    @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcutWithin()")
+//  @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodCallPointcut()")
+//  @Around("com.m91snik.aspect.pointcut.ServicePointcut.businessMethodPointcutWithin()")
     @Around("execution(* com.m91snik.business.service..*(..))")
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
