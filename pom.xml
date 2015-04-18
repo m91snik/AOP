@@ -63,9 +63,6 @@
                     <version>${springframework.version}</version>
                 </dependency>
             </dependencies>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <target>spring_aop</target>
             </properties>
@@ -316,7 +313,7 @@
         </profile>
     </profiles>
 
-    <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-3.2.8.RELEASE.jar-->
+    <!---javaagent:/home/nikolay.garbuzov/.m2/repository/org/springframework/spring-instrument/3.2.8.RELEASE/spring-instrument-4.1.5.RELEASE.jar-->
 
     <build>
         <resources>
