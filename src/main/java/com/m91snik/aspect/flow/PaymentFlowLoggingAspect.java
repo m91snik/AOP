@@ -19,7 +19,8 @@ public class PaymentFlowLoggingAspect {
         System.out.println("FlowLoggingAspect init");
     }
 
-    @Pointcut("execution(* com.m91snik.facade.PaymentServiceFacade.*(com.m91snik.contract.HasRefId+,..)) && args(hasRefId,..)")
+    @Pointcut("execution(* com.m91snik.facade.PaymentServiceFacade.*(com.m91snik.contract.HasRefId+,..)) " +
+            "&& args(hasRefId,..)")
     public void paymentServiceFacadeUsage(HasRefId hasRefId) {
     }
 

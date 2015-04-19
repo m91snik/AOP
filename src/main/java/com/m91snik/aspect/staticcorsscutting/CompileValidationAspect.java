@@ -19,7 +19,8 @@ public class CompileValidationAspect {
     @DeclareWarning("get(* System.out) && within(com.m91snik.business.service..*)")
     private static final String DEFAULT_LOGGING_USAGE = "Use log4j instead of System.out!!";
 
-    @DeclareWarning("call(* com.m91snik.business.session..*(..)) && within(com.m91snik.business.service..*)")
+    @DeclareWarning("call(* com.m91snik.business.session..*(..)) " +
+            "&& within(com.m91snik.business.service..*)")
     private static final String SERVICE_BOUNDARY_BROKEN = "Service tries to break it's security boundary";
 
 

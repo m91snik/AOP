@@ -20,7 +20,8 @@ public class SecurityProtectionAspect {
     private SessionService sessionService;
 
     //NOTE: it provides more flexibility than Spring @Secured contract because you can use any pointcut here
-    @Before("com.m91snik.aspect.pointcut.ServicePointcut.securedBusinessMethodPointcut() && @annotation(sessionRequired)")
+    @Before("com.m91snik.aspect.pointcut.ServicePointcut.securedBusinessMethodPointcut() " +
+            "&& @annotation(sessionRequired)")
     public void checkUserPermission(SessionRequired sessionRequired) throws Throwable {
         Session currentSession = sessionService.getCurrentSession();
 
@@ -36,7 +37,9 @@ public class SecurityProtectionAspect {
 
     private boolean checkPermissions(SessionRequired sessionRequired, Session currentSession) {
         Group currentGroup = currentSession.getGroup();
-        return Arrays.stream(sessionRequired.group()).filter(group -> group == currentGroup).findFirst().isPresent();
+        return Arrays.stream(sessionRequired.group())
+                .filter(group -> group == currentGroup)
+                .findFirst().isPresent();
     }
 
 }
